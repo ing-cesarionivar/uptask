@@ -13,9 +13,33 @@
         ];
         $hash_password = password_hash($password, PASSWORD_BCRYPT, $opciones);
 
-        $respuesta = [
-            'pass' => $hash_password
-        ];
+        // Importar la conexión
+        include_once("../functions/conexion.php");
+
+        try {
+            // Realizar la consulta a la base de datos
+            $stmt = $conn->prepare("INSERT INTO usuarios(usuario, password) VALUES (?,?);");
+            $stmt->bind_param("ss", $usuario, $hash_password);
+            $stmt->execute();
+            
+            if($stmt->affected_rows) {
+                $respuesta = [
+                    'respuesta' => 'correcto',
+                    'id_insertado' => $stmt->insert_id,
+                    'tipo' => $accion
+                ];
+                
+            }
+
+            $stmt->close();
+            $conn->close();
+
+        } catch (Exception $_ENV) {
+            // En caso de un error tomar la excepcion
+            $respuesta = [
+                'pass' => $e->getMessage()
+            ];
+        }
 
         echo json_encode($respuesta);
 
