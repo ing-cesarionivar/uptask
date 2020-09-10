@@ -22,13 +22,17 @@
             $stmt->bind_param("ss", $usuario, $hash_password);
             $stmt->execute();
             
-            if($stmt->affected_rows) {
+            if($stmt->affected_rows > 0) {
                 $respuesta = [
                     'respuesta' => 'correcto',
                     'id_insertado' => $stmt->insert_id,
                     'tipo' => $accion
                 ];
                 
+            } else {
+                $respuesta = [
+                    'respuesta' => 'error'
+                ];
             }
 
             $stmt->close();
