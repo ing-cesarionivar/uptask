@@ -38,7 +38,7 @@ function validarRegistro(e) {
             if(this.status === 200){
                 console.log(JSON.parse(xhr.responseText));
             }
-        }   
+        }
 
 
         // Enviar la petición
