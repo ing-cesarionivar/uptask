@@ -38,7 +38,7 @@ function validarRegistro(e) {
             if(this.status === 200){
 
                 let respuesta = JSON.parse(xhr.responseText);
-
+                console.log(respuesta);
                 // Si la respuesta es correcta
                 if(respuesta.respuesta === 'correcto') {
                     // Si es un nuevo usuario
@@ -49,13 +49,17 @@ function validarRegistro(e) {
                             text: 'El usuario se creó correctamente'
                         });
 
+                    } else if(respuesta.tipo === 'login') {
+                       
+
+                        
                     }
                 } else {
                     // Hubo un error
                     Swal.fire({
                         icon: 'error',
                         title: 'Error',
-                        text: 'Hubo un error'
+                        text: 'Usuario o contraseña incorrecto!'
                     });
                 }
             }

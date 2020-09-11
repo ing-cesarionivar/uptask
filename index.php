@@ -53,7 +53,7 @@
             <div class="listado-pendientes">
                 <ul>
 
-                    <li id="tarea:<?php echo $tarea['id'] ?>" class="tarea">
+                    <li id="tarea:" class="tarea">
                     <p>Cambiar el Logotipo</p>
                         <div class="acciones">
                             <i class="far fa-check-circle"></i>

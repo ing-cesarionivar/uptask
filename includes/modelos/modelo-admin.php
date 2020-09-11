@@ -51,6 +51,50 @@
 
     if($accion === 'login') {
         // Escribir código para que loguee a los administradores
+        // Importar la conexión
+        include_once("../functions/conexion.php");
+
+        try {
+            // Seleccionar el administrador de la base de datos
+
+            $stmt = $conn->prepare("SELECT id, usuario, password FROM usuarios WHERE usuario = ?;");
+            $stmt->bind_param("s", $usuario);
+            $stmt->execute();
+            
+            // Loguer el usuario
+            $stmt->bind_result($id_usuario, $nombre_usuario, $password_usuario);
+            $stmt->fetch();
+            if($nombre_usuario) {
+                // El usuario existe verificar el password
+                if(password_verify($password, $password_usuario)) {
+                    // Login correcto
+                    $respuesta = [
+                        'respuesta' => 'correcto',
+                        'nombre' => $nombre_usuario
+                    ];
+                } else {
+                    // Login incorrecto, enviar error
+                    $respuesta = [
+                        'resultado' => 'Usuario o contraseña incorreto'
+                    ];
+                }
+            } else {
+                $respuesta = [
+                    'respuesta' => 'Usuario no existe'
+                ];
+            }
+            
+            $stmt->close();
+            $conn->close();
+
+        } catch (Exception $_ENV) {
+            // En caso de un error tomar la excepcion
+            $respuesta = [
+                'pass' => $e->getMessage()
+            ];
+        }
+
+        echo json_encode($respuesta);
 
     }
 
