@@ -50,7 +50,16 @@ function validarRegistro(e) {
                         });
 
                     } else if(respuesta.tipo === 'login') {
-                       
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Login correcto',
+                            text: 'Presiona OK para abrir el dashboard'
+                        }).
+                        then(resultado => {
+                            if(resultado.value) {
+                                window.location.href = 'index.php';
+                            }
+                        });
 
                         
                     }

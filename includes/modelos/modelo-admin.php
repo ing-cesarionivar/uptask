@@ -70,7 +70,8 @@
                     // Login correcto
                     $respuesta = [
                         'respuesta' => 'correcto',
-                        'nombre' => $nombre_usuario
+                        'nombre' => $nombre_usuario,
+                        'tipo' => $accion
                     ];
                 } else {
                     // Login incorrecto, enviar error
