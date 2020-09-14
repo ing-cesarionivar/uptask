@@ -2,34 +2,12 @@
     include_once("includes/functions/sesiones.php"); 
     include_once("includes/functions/funciones.php"); 
     include_once("includes/templates/header.php");
+    include_once("includes/templates/barra.php");
 ?>
-    <div class="barra">
-        <h1>UpTask - Administración de Proyectos</h1>
-        <a href="#">Cerrar Sesión</a>
-    </div>
 
     <div class="contenedor">
-        <aside class="contenedor-proyectos">
-            <div class="panel crear-proyecto">
-                <a href="#" class="boton">Nuevo Proyecto <i class="fas fa-plus"></i> </a>
-            </div>
         
-            <div class="panel lista-proyectos">
-                <h2>Proyectos</h2>
-                <ul id="proyectos">
-                    <li>
-                        <a href="#">
-                            Diseño Página Web
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            Nuevo Sitio en wordPress
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </aside>
+        <?php include_once("includes/templates/sidebar.php"); ?>
 
         <main class="contenido-principal">
             <h1>

@@ -1,6 +1,12 @@
-<?php 
+<?php session_start();
     include_once("includes/functions/funciones.php"); 
     include_once("includes/templates/header.php"); 
+    if(isset($_GET['cerrar_sesion'])) {
+       $_SESSION = [];
+       session_destroy();
+       header('Location:  login.php');
+
+    } 
 ?>
 
     <div class="contenedor-formulario">
