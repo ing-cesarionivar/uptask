@@ -67,6 +67,12 @@
             if($nombre_usuario) {
                 // El usuario existe verificar el password
                 if(password_verify($password, $password_usuario)) {
+                    // Iniciar la sesion
+                    session_start();
+                    $_SESSION['nombre'] = $nombre_usuario;
+                    $_SESSION['id'] = $id_usuario;
+                    $_SESSION['login'] = true;
+                    
                     // Login correcto
                     $respuesta = [
                         'respuesta' => 'correcto',
