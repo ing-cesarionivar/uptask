@@ -41,7 +41,7 @@
         } catch (Exception $_ENV) {
             // En caso de un error tomar la excepcion
             $respuesta = [
-                'pass' => $e->getMessage()
+                'error' => $e->getMessage()
             ];
         }
 
@@ -97,7 +97,7 @@
         } catch (Exception $_ENV) {
             // En caso de un error tomar la excepcion
             $respuesta = [
-                'pass' => $e->getMessage()
+                'error' => $e->getMessage()
             ];
         }
 
