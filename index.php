@@ -17,12 +17,14 @@
         <?php include_once("includes/templates/sidebar.php"); ?>
 
         <main class="contenido-principal">
-            <h1> Proyecto Actual:
                 
-                <?php 
+            <?php 
+            $proyecto = obtenerNombreProyecto($id_proyecto);
 
-                $proyecto = obtenerNombreProyecto($id_proyecto);
+            if($proyecto): ?>
 
+            <h1> Proyecto Actual:
+            <?php
                 foreach($proyecto as $nombre): ?>
 
                 <span>
@@ -30,7 +32,7 @@
                 </span>        
             
                 <?php endforeach; ?>
-                
+
             </h1>
 
             <form action="#" class="agregar-tarea">
@@ -44,7 +46,13 @@
                 </div>
             </form>
             
-    
+            <?php else:
+                    // Si no hay proyecto seleccionados
+                    echo "<p>Selecciona un proyecto a la izquierda";
+                endif;
+            ?>
+
+                    
 
             <h2>Listado de tareas:</h2>
 

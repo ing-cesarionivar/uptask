@@ -21,20 +21,15 @@
     }
 
     // Obtener nombre proyecto
-    function obtenerNombreProyecto($id) {
+    function obtenerNombreProyecto($id = null) {
         include("conexion.php");
 
-        if($id != null) {
-            try {
-             return $conn->query("SELECT nombre FROM proyectos WHERE id = {$id}");
-    
-            } catch(Exception $e) {
-                echo "Error: " . $e->getMessage();
-                return false;
-            }
+        try {
+            return $conn->query("SELECT nombre FROM proyectos WHERE id = {$id}");
 
-        } else {
-            return [];
+        } catch(Exception $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
         }
 
     }
