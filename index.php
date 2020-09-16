@@ -1,8 +1,15 @@
 <?php 
     include_once("includes/functions/sesiones.php"); 
-    include_once("includes/functions/funciones.php"); 
+    include_once("includes/functions/funciones.php");
     include_once("includes/templates/header.php");
     include_once("includes/templates/barra.php");
+    
+    //Obtener el id de la url
+    if(isset($_GET['id_proyecto'])) {
+        $id_proyecto = $_GET['id_proyecto'];
+    } else {
+        $id_proyecto = null;
+    }
 ?>
 
     <div class="contenedor">
@@ -10,8 +17,20 @@
         <?php include_once("includes/templates/sidebar.php"); ?>
 
         <main class="contenido-principal">
-            <h1>
-                <span>Diseño de Página Web</span>
+            <h1> Proyecto Actual:
+                
+                <?php 
+
+                $proyecto = obtenerNombreProyecto($id_proyecto);
+
+                foreach($proyecto as $nombre): ?>
+
+                <span>
+                    <?php echo $nombre['nombre']; ?>
+                </span>        
+            
+                <?php endforeach; ?>
+                
             </h1>
 
             <form action="#" class="agregar-tarea">
@@ -20,7 +39,7 @@
                     <input type="text" placeholder="Nombre Tarea" class="nombre-tarea"> 
                 </div>
                 <div class="campo enviar">
-                    <input type="hidden" id="id_proyecto" value="id_proyecto">
+                    <input type="hidden" id="<?php echo $id_proyecto; ?>">
                     <input type="submit" class="boton nueva-tarea" value="Agregar">
                 </div>
             </form>
