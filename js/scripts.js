@@ -127,6 +127,28 @@ function agregarTarea(e) {
         });
     } else {
         // La tarea tiene algo, insertar en PHP
+
+        // Crear llamado ajax
+        let xhr = new XMLHttpRequest();
+
+        let datos =  new FormData();
+        datos.append('tarea', nombreTarea);
+        datos.append('tipo', 'crear');
+        datos.append('id_proyecto', document.querySelector('#id_proyecto').value);
+
+        // Abrir la conexión
+        xhr.open('POST', 'includes/modelos/modelo-tareas.php', true);
+
+        // Ejecutarlo y respuesta
+        xhr.onload = function() {
+            if(this.status === 200) {
+                let respuesta = JSON.parse(xhr.responseText);
+                console.log(respuesta);
+            }
+        }
+
+        // Enviar los datos
+        xhr.send(datos);
         
     }
 }
