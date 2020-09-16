@@ -215,11 +215,26 @@ function accionesTareas(e) {
     e.preventDefault();
     
     if(e.target.classList.contains('fa-check-circle')) {
-        console.log('Hiciste click en el circulo');
+        
+        if(e.target.classList.contains('completo')) {
+            e.target.classList.remove('completo');
+            cambiarEstadoTarea(e.target);
+        } else {
+            e.target.classList.add('completo');
+            cambiarEstadoTarea(e.target);
+        }
+
     }
 
     if(e.target.classList.contains('fa-trash')) {
         console.log('Hiciste click en el zafacón');
     } 
 }
+
+// Completa o descompleta la tarea
+function cambiarEstadoTarea(tarea){
+    let idTarea = tarea.parentElement.parentElement.id.split(':');
+    console.log(idTarea[1]);
+}
+
 eventListeners();
