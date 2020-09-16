@@ -143,7 +143,61 @@ function agregarTarea(e) {
         xhr.onload = function() {
             if(this.status === 200) {
                 let respuesta = JSON.parse(xhr.responseText);
-                console.log(respuesta);
+                
+                // Asignar valores
+                let resultado = respuesta.respuesta;
+                
+                if(resultado === 'correcto') {
+                    let id_insertado = respuesta.id_insertado;
+                    let tarea = respuesta.tarea;
+                    let tipo = respuesta.tipo;
+                    
+                    if(tipo === 'crear') {
+                        // Lanzar alerta
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Tarea creada',
+                            text: 'La tarea: ' + tarea + ' se creó correctamente'
+                        });
+                        
+                        // Construir el template
+                        let nuevaTarea = document.createElement('li');
+
+                        // Agregamos el ID
+                        nuevaTarea.id = 'tarea:'+id_insertado;
+
+                        // Agregar la clase tarea
+                        nuevaTarea.classList.add('tarea');
+
+                        // Construir el html 
+                        nuevaTarea.innerHTML = `
+                            <p>${tarea}</p>
+                            <div class="acciones">
+                                <i class="far fa-check-circle"></i>
+                                <i class="fas fa-trash"></i>
+                            </div>
+                        `;
+
+                        // Agregarlo al HTML
+                        let listado = document.querySelector('.listado-pendientes ul');
+                        listado.appendChild(nuevaTarea);
+
+                        // Limpiar el formulario
+                        document.querySelector('.agregar-tarea').reset();
+
+                    }
+                    
+
+
+                } else {
+                    // Hubo un error
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error!',
+                        text: 'Error al agregar la tarea'
+                    });
+                }
+
             }
         }
 
